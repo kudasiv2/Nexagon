@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexagon - Advanced Investment Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="Nexagon Logo" class="logo-img">
+                <span class="logo-text">Nexagon</span>
+            </div>
+            <div class="nav-actions">
+                <button class="connect-wallet-btn" id="connectWallet">
+                    <i class="fas fa-wallet"></i>
+                    Connect Wallet
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Revolutionary <span class="gradient-text">Investment</span> Platform</h1>
+                <p class="hero-subtitle">Maximize your returns with our advanced investment plans. Secure, transparent, and high-yield opportunities await.</p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <h3 id="totalUsers">0</h3>
+                            <p>Total Investors</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="stat-info">
+                            <h3 id="totalInvested">0</h3>
+                            <p>Total Invested</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div class="stat-info">
+                            <h3 id="totalPaid">0</h3>
+                            <p>Total Paid Out</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Plans -->
+    <section class="plans-section">
+        <div class="container">
+            <h2 class="section-title">Investment <span class="gradient-text">Plans</span></h2>
+            <p class="section-subtitle">Choose from our carefully crafted investment plans designed for maximum returns</p>
+            
+            <div class="plans-grid" id="plansGrid">
+                <!-- Plans will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- User Dashboard -->
+    <section class="dashboard-section" id="dashboardSection" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Your <span class="gradient-text">Dashboard</span></h2>
+            
+            <div class="dashboard-grid">
+                <!-- User Stats -->
+                <div class="dashboard-card stats-card">
+                    <h3><i class="fas fa-chart-bar"></i> Investment Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Invested</span>
+                            <span class="stat-value" id="userTotalInvested">0 USDT</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Withdrawn</span>
+                            <span class="stat-value" id="userTotalWithdrawn">0 USDT</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Referral Bonus</span>
+                            <span class="stat-value" id="userReferralBonus">0 USDT</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Pending Rewards</span>
+                            <span class="stat-value" id="userPendingRewards">0 USDT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-card actions-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="actions-grid">
+                        <button class="action-btn withdraw-btn" id="withdrawROI">
+                            <i class="fas fa-download"></i>
+                            Withdraw ROI
+                        </button>
+                        <button class="action-btn referral-btn" id="withdrawReferral">
+                            <i class="fas fa-gift"></i>
+                            Withdraw Referral
+                        </button>
+                        <div class="next-claim">
+                            <i class="fas fa-clock"></i>
+                            Next Withdraw: <span id="nextWithdrawTime">--:--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Investments -->
+            <div class="investments-section">
+                <h3><i class="fas fa-folder-open"></i> Active Investments</h3>
+                <div class="investments-list" id="investmentsList">
+                    <!-- Investments will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referral System -->
+    <section class="referral-section">
+        <div class="container">
+            <h2 class="section-title">Referral <span class="gradient-text">Program</span></h2>
+            <p class="section-subtitle">Earn up to 15 levels of referral bonuses from your team's withdrawals</p>
+            
+            <div class="referral-content">
+                <div class="referral-info">
+                    <div class="referral-card">
+                        <i class="fas fa-sitemap"></i>
+                        <h4>15-Level System</h4>
+                        <p>Comprehensive multi-level referral program with attractive commissions</p>
+                    </div>
+                    <div class="referral-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h4>Bonus From Withdrawals</h4>
+                        <p>Earn commissions from your team's withdrawal activities</p>
+                    </div>
+                    <div class="referral-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <h4>Real-time Tracking</h4>
+                        <p>Monitor your referral earnings and team performance</p>
+                    </div>
+                </div>
+                
+                <div class="referral-levels">
+                    <h4>Referral Commission Levels</h4>
+                    <div class="levels-grid" id="levelsGrid">
+                        <!-- Levels will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Nexagon Logo" class="logo-img">
+                    <span class="logo-text">Nexagon</span>
+                </div>
+                <p class="footer-text">Advanced Investment Platform Built on Blockchain Technology</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nexagon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Investment Modal -->
+    <div class="modal" id="investmentModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Invest in <span id="modalPlanName"></span></h3>
+            <div class="modal-body">
+                <div class="plan-details" id="modalPlanDetails"></div>
+                <div class="investment-form">
+                    <label for="investmentAmount">Investment Amount (USDT):</label>
+                    <input type="number" id="investmentAmount" placeholder="Enter amount in USDT">
+                    <label for="referrerAddress">Referrer Address (Optional):</label>
+                    <input type="text" id="referrerAddress" placeholder="Enter referrer address">
+                    <button class="invest-now-btn" id="confirmInvest">Invest Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
