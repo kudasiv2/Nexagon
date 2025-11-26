@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bignumber.js@9.1.2/bignumber.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <style>
-        /* CSS styles remain exactly the same as in your original code */
         :root {
             /* New Color Palette: Premium Purple & Elegant Dark Black */
             --primary-black: #05020a;
@@ -1317,6 +1316,134 @@
             color: var(--gray-500);
         }
 
+        /* Leadership Section */
+        .leadership-section {
+            background: var(--primary-black);
+            min-height: 100vh;
+        }
+
+        .leadership-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-3xl);
+            text-align: left;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
+            text-align: left;
+        }
+
+        .leadership-card {
+            background: var(--gradient-elegant);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2xl);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-elegant);
+            position: relative;
+            text-align: center;
+        }
+        
+        .leadership-card.locked {
+            background: rgba(10, 10, 10, 0.5);
+            border-color: rgba(128,128,128,0.2);
+        }
+        .leadership-card.locked .leadership-header,
+        .leadership-card.locked .leadership-requirements {
+             opacity: 0.5;
+        }
+        
+        .leadership-card:hover {
+            border-color: var(--primary-purple);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-purple-lg);
+        }
+        
+        .leadership-card.locked:hover {
+             border-color: rgba(128,128,128,0.4);
+             transform: translateY(0);
+             box-shadow: var(--shadow-elegant);
+        }
+
+        .leadership-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid rgba(147, 51, 234, 0.1);
+        }
+        
+        .leadership-card.locked .leadership-header {
+            border-color: rgba(128,128,128,0.1);
+        }
+
+        .leadership-level {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: var(--font-size-2xl);
+            box-shadow: var(--shadow-purple);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .leadership-card.locked .leadership-level {
+            background: var(--gray-700);
+            box-shadow: none;
+        }
+
+        .leadership-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--white);
+            font-family: var(--font-heading);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .leadership-bonus {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--primary-purple);
+            font-family: var(--font-heading);
+        }
+        
+        .leadership-card.locked .leadership-bonus {
+            color: var(--gray-400);
+        }
+
+        .leadership-requirements {
+            margin-bottom: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+        }
+
+        .leadership-requirement {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            color: var(--gray-300);
+            font-size: var(--font-size-base);
+        }
+
+        .leadership-requirement i {
+            color: var(--primary-purple);
+        }
+        .leadership-card.locked .leadership-requirement i {
+            color: var(--gray-500);
+        }
 
         .bonus-claim-section {
             margin-bottom: var(--spacing-3xl);
@@ -1708,11 +1835,11 @@
                 width: 80%;
             }
 
-            .referral-stats {
+            .referral-stats, .leadership-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .levels-grid {
+            .levels-grid, .leadership-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1751,7 +1878,7 @@
                 font-size: var(--font-size-sm);
             }
 
-            .referral-stats {
+            .referral-stats, .leadership-stats {
                 grid-template-columns: 1fr;
             }
         }
@@ -1794,6 +1921,9 @@
                     </li>
                     <li class="nav__item">
                         <a class="nav__link" data-section="referral">Referral</a>
+                    </li>
+                    <li class="nav__item">
+                        <a class="nav__link" data-section="leadership">Leadership</a>
                     </li>
                     <li class="nav__item">
                         <a class="nav__link" data-section="faq">FAQ</a>
@@ -2224,6 +2354,93 @@
             </div>
         </section>
 
+        <!-- Leadership Section -->
+        <section class="leadership-section section" id="leadership" style="display: none;">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Leadership Program</h2>
+                    <p class="section__subtitle">Unlock exclusive leadership bonuses by building a strong team and achieving investment milestones</p>
+                </div>
+
+                <div class="alert alert-warning" id="leadershipWalletAlert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Please connect your wallet to view leadership program</span>
+                </div>
+
+                <div class="leadership-stats" id="leadershipStats" style="display: none;">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="leadershipTeamCount">0</div>
+                            <div class="stat-label">Active Team Members</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="leadershipBonusStats">0 USDT</div>
+                            <div class="stat-label">Leadership Earnings</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="currentLeadershipLevel">0</div>
+                            <div class="stat-label">Current Level</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="nextLevelProgress">0%</div>
+                            <div class="stat-label">Next Level Progress</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="leadership-grid" id="leadershipLevelsGrid">
+                    <!-- Leadership levels will be populated by JavaScript -->
+                </div>
+
+                <div class="bonus-claim-section" id="leadershipBonusClaim" style="display: none;">
+                    <div class="claim-card">
+                        <div class="claim-info">
+                            <h3>Available Leadership Bonus</h3>
+                            <p>You have leadership earnings available for withdrawal. Build a stronger team to unlock higher bonuses!</p>
+                        </div>
+                        <div class="bonus-amount" id="availableLeadershipBonus">0 USDT</div>
+                        <button class="btn btn--primary" id="claimLeadershipBonusMain">
+                            <i class="fas fa-crown"></i>
+                            Claim Leadership Bonus
+                        </button>
+                    </div>
+                </div>
+
+                <div class="leadership-info" style="margin-top: var(--spacing-3xl); text-align: center;">
+                    <h3 style="color: var(--white); margin-bottom: var(--spacing-lg);">How Leadership Program Works</h3>
+                    <div class="stats-box" style="text-align: left;">
+                        <p style="color: var(--gray-300); line-height: 1.7; margin-bottom: var(--spacing-md);">
+                            The Leadership Program rewards you for building and maintaining an active team. As your team grows and remains active, you unlock higher leadership levels with increased bonus rates.
+                        </p>
+                        <ul style="color: var(--gray-300); line-height: 1.7; padding-left: var(--spacing-lg);">
+                            <li style="margin-bottom: var(--spacing-sm);">Each level requires a minimum number of active team members</li>
+                            <li style="margin-bottom: var(--spacing-sm);">Leadership bonuses are calculated based on your team's ROI withdrawals</li>
+                            <li style="margin-bottom: var(--spacing-sm);">Higher levels provide significantly increased bonus percentages</li>
+                            <li>Your leadership level is automatically updated as your team grows</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- FAQ Section -->
         <section class="faq-section section" id="faq" style="display: none;">
             <div class="container">
@@ -2270,6 +2487,16 @@
                         </div>
                         <div class="faq-answer">
                             <p>Our referral program has 15 levels with varying commission rates from 15% down to 1%. You earn commissions from your referrals' investments based on your total investment amount and level requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does the leadership program work?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The leadership program rewards you for building an active team. With 3 levels requiring 200, 500, and 1000 active team members, you can earn additional bonuses of 3%, 7%, and 10% respectively from your team's ROI withdrawals.</p>
                         </div>
                     </div>
 
@@ -2348,6 +2575,7 @@
                         <a class="footer-link" data-section="statistics">Statistics</a>
                         <a class="footer-link" data-section="invest">Invest</a>
                         <a class="footer-link" data-section="referral">Referral</a>
+                        <a class="footer-link" data-section="leadership">Leadership</a>
                         <a class="footer-link" data-section="dashboard">Dashboard</a>
                     </div>
                     <div class="footer__column">
@@ -2409,6 +2637,7 @@
             dashboard: document.getElementById('dashboard'),
             invest: document.getElementById('invest'),
             referral: document.getElementById('referral'),
+            leadership: document.getElementById('leadership'),
             faq: document.getElementById('faq')
         };
 
@@ -2421,6 +2650,7 @@
             checkURLForReferral();
             setupFAQ();
             generateReferralLevels(); // Initial generation for non-logged-in users
+            generateLeadershipLevels(); // Initial generation for non-logged-in users
         });
 
         function setupFAQ() {
@@ -2574,6 +2804,7 @@
             document.getElementById('shareWhatsapp').addEventListener('click', () => shareOnSocial('whatsapp'));
             document.getElementById('claimReferralBonus').addEventListener('click', withdrawReferral);
             document.getElementById('claimLeadershipBonus').addEventListener('click', withdrawLeadership);
+            document.getElementById('claimLeadershipBonusMain').addEventListener('click', withdrawLeadership);
 
             if (window.ethereum) {
                 window.ethereum.on('accountsChanged', (accounts) => {
@@ -2583,6 +2814,7 @@
                     else {
                         showWalletAlerts();
                         generateReferralLevels(); // Regenerate levels for non-logged-in view
+                        generateLeadershipLevels(); // Regenerate levels for non-logged-in view
                     }
                 });
                 window.ethereum.on('chainChanged', () => window.location.reload());
@@ -2617,16 +2849,16 @@
         }
 
         function showWalletAlerts() {
-            ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert'].forEach(id => document.getElementById(id).style.display = 'flex');
-            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'investmentHistory', 'referralStats', 'referralLinkSection', 'bonusClaimSection', 'leadershipClaimSection'].forEach(id => {
+            ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert', 'leadershipWalletAlert'].forEach(id => document.getElementById(id).style.display = 'flex');
+            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'investmentHistory', 'referralStats', 'referralLinkSection', 'bonusClaimSection', 'leadershipClaimSection', 'leadershipStats', 'leadershipBonusClaim'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'none';
             });
         }
 
         function hideWalletAlerts() {
-            ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert'].forEach(id => document.getElementById(id).style.display = 'none');
-             ['quickStats', 'referralStats'].forEach(id => {
+            ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert', 'leadershipWalletAlert'].forEach(id => document.getElementById(id).style.display = 'none');
+             ['quickStats', 'referralStats', 'leadershipStats'].forEach(id => {
                  const el = document.getElementById(id);
                 if (el) el.style.display = 'grid';
             });
@@ -2639,6 +2871,7 @@
             try {
                 const userInfo = await contract.methods.getUserInfo(userAccount).call();
                 const pendingRewards = await contract.methods.getPendingRewards(userAccount).call();
+                const teamCount = await contract.methods.getTeamMembersCount(userAccount).call();
 
                 const formatUSDT = (weiValue) => parseFloat(web3.utils.fromWei(weiValue, 'ether')).toFixed(2);
                 
@@ -2649,8 +2882,11 @@
                 document.getElementById('leadershipBonus').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
                 document.getElementById('referralBonusAmount').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
                 document.getElementById('leadershipBonusAmount').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
+                document.getElementById('leadershipTeamCount').textContent = teamCount;
+                document.getElementById('leadershipBonusStats').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
                 document.getElementById('availableBonus').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
                 document.getElementById('availableLeadership').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
+                document.getElementById('availableLeadershipBonus').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
                 
                 // Calculate referral level based on total invested
                 let userLevel = 0;
@@ -2664,6 +2900,29 @@
                 }
                 document.getElementById('referralLevel').textContent = userLevel;
                 
+                // Calculate leadership level based on team count
+                let leadershipLevel = 0;
+                const leadershipRequirements = await contract.methods.getLeadershipRequirements().call();
+                for (let i = 0; i < leadershipRequirements.length; i++) {
+                    if (parseInt(teamCount) >= parseInt(leadershipRequirements[i])) {
+                        leadershipLevel = i + 1;
+                    } else {
+                        break;
+                    }
+                }
+                document.getElementById('currentLeadershipLevel').textContent = leadershipLevel;
+                
+                // Calculate next level progress
+                let nextLevelProgress = 0;
+                if (leadershipLevel < 3) {
+                    const currentRequirement = leadershipLevel > 0 ? parseInt(leadershipRequirements[leadershipLevel-1]) : 0;
+                    const nextRequirement = parseInt(leadershipRequirements[leadershipLevel]);
+                    nextLevelProgress = Math.min(100, Math.round((parseInt(teamCount) - currentRequirement) / (nextRequirement - currentRequirement) * 100));
+                } else {
+                    nextLevelProgress = 100;
+                }
+                document.getElementById('nextLevelProgress').textContent = `${nextLevelProgress}%`;
+                
                 // Show/hide bonus claim sections
                 if (parseInt(userInfo.referralBonus) > 0) {
                     document.getElementById('bonusClaimSection').style.display = 'block';
@@ -2673,8 +2932,10 @@
 
                 if (parseInt(userInfo.leadershipBonus) > 0) {
                     document.getElementById('leadershipClaimSection').style.display = 'block';
+                    document.getElementById('leadershipBonusClaim').style.display = 'block';
                 } else {
                     document.getElementById('leadershipClaimSection').style.display = 'none';
+                    document.getElementById('leadershipBonusClaim').style.display = 'none';
                 }
 
                 const investments = await contract.methods.getUserInvestments(userAccount).call();
@@ -2690,6 +2951,8 @@
                 
                 // Regenerate referral levels with user data
                 generateReferralLevels(userInfo.totalInvested);
+                // Regenerate leadership levels with user data
+                generateLeadershipLevels(teamCount);
 
             } catch (error) {
                 console.error('Error loading user data:', error);
@@ -2960,6 +3223,45 @@
                             <div class="requirement">
                                 <i class="fas fa-wallet"></i>
                                 <span>Minimum Invest: ${level.requirement} USDT</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function generateLeadershipLevels(teamCount = 0) {
+            const levelsContainer = document.getElementById('leadershipLevelsGrid');
+            if (!levelsContainer) return;
+
+            const teamCountNum = parseInt(teamCount);
+            
+            const levels = [
+                { level: 1, title: 'Team Leader', bonus: '3%', requirement: '200', description: 'Build a team of 200 active members' },
+                { level: 2, title: 'Senior Leader', bonus: '7%', requirement: '500', description: 'Expand your team to 500 active members' },
+                { level: 3, title: 'Executive Leader', bonus: '10%', requirement: '1000', description: 'Achieve 1000 active team members' }
+            ];
+            
+            levelsContainer.innerHTML = levels.map(level => {
+                const isLocked = teamCountNum < parseInt(level.requirement);
+                const lockClass = isLocked ? 'locked' : 'unlocked';
+                
+                return `
+                    <div class="leadership-card ${lockClass}">
+                        ${isLocked ? '<div class="lock-icon"><i class="fas fa-lock"></i></div>' : ''}
+                        <div class="leadership-header">
+                            <div class="leadership-level">${level.level}</div>
+                            <div class="leadership-title">${level.title}</div>
+                            <div class="leadership-bonus">${level.bonus} Bonus</div>
+                        </div>
+                        <div class="leadership-requirements">
+                            <div class="leadership-requirement">
+                                <i class="fas fa-users"></i>
+                                <span>${level.requirement} Active Team Members</span>
+                            </div>
+                            <div class="leadership-requirement">
+                                <i class="fas fa-info-circle"></i>
+                                <span>${level.description}</span>
                             </div>
                         </div>
                     </div>
