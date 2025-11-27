@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexagon - Advanced DeFi Investment Platform</title>
+    <title>Nexagon - Premium Investment Protocol</title>
     <link rel="icon" type="image/x-icon" href="image/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -342,17 +342,13 @@
             text-align: center;
         }
         
-        #home.section, #statistics.section {
+        #home.section {
             min-height: auto;
         }
         
         #home {
             padding-top: 120px;
             padding-bottom: var(--spacing-2xl);
-        }
-
-        #statistics {
-            padding-top: 120px; /* Fixed padding for statistics section */
         }
 
         .section .container {
@@ -567,101 +563,6 @@
             font-weight: 600;
             font-family: var(--font-heading);
             font-size: var(--font-size-lg);
-        }
-
-        /* Statistics Section */
-        #statistics {
-            background: var(--gradient-dark);
-            min-height: 100vh;
-        }
-
-        .statistics-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-2xl);
-            margin-top: var(--spacing-xl);
-            width: 100%;
-            max-width: 1000px;
-        }
-
-        .stats-box {
-            background: var(--gradient-elegant);
-            border: 1px solid rgba(147, 51, 234, 0.2);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-xl);
-            backdrop-filter: blur(15px);
-            box-shadow: var(--shadow-elegant);
-            text-align: left;
-        }
-
-        .stats-box__header {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-md);
-            border-bottom: 1px solid rgba(147, 51, 234, 0.2);
-        }
-
-        .stats-box__header i {
-            font-size: var(--font-size-xl);
-            color: var(--primary-purple);
-        }
-        .stats-box__header h3 {
-            font-family: var(--font-heading);
-            color: var(--white);
-            font-size: var(--font-size-lg);
-            font-weight: 600;
-        }
-
-        .stats-box__list {
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: var(--spacing-sm);
-        }
-
-        /* Custom scrollbar for stats list */
-        .stats-box__list::-webkit-scrollbar {
-            width: 6px;
-        }
-        .stats-box__list::-webkit-scrollbar-track {
-            background: rgba(147, 51, 234, 0.1);
-            border-radius: var(--radius-sm);
-        }
-        .stats-box__list::-webkit-scrollbar-thumb {
-            background: var(--primary-purple);
-            border-radius: var(--radius-sm);
-        }
-
-        .stat-entry {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: var(--spacing-sm) var(--spacing-md);
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid rgba(147, 51, 234, 0.1);
-            font-size: var(--font-size-sm);
-        }
-        .stat-entry:last-child {
-            border-bottom: none;
-        }
-
-        .stat-entry__address {
-            color: var(--gray-300);
-            font-family: monospace;
-        }
-        .stat-entry__time {
-            color: var(--gray-500);
-            font-size: var(--font-size-xs);
-            grid-column: 1 / 2;
-        }
-        .stat-entry__amount {
-            color: var(--secondary-purple);
-            font-weight: 600;
-            font-size: var(--font-size-base);
-            grid-row: 1 / 3;
-            grid-column: 2 / 3;
-            align-self: center;
-            text-align: right;
         }
 
         /* Dashboard Section */
@@ -1006,41 +907,6 @@
             margin-bottom: var(--spacing-sm);
         }
 
-        .investment-summary {
-            background: rgba(5, 2, 10, 0.8);
-            border: 1px solid rgba(147, 51, 234, 0.2);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-xl);
-            margin: var(--spacing-2xl) 0;
-        }
-
-        .investment-summary h3 {
-            margin-bottom: var(--spacing-lg);
-            color: var(--white);
-            text-align: center;
-            font-family: var(--font-heading);
-            font-size: var(--font-size-xl);
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid rgba(147, 51, 234, 0.1);
-            color: var(--gray-300);
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-
-        .summary-item.total {
-            font-weight: 700;
-            color: var(--primary-purple);
-            font-size: var(--font-size-lg);
-        }
-
         /* Investment Success Popup */
         .investment-success-popup {
             position: fixed;
@@ -1200,72 +1066,34 @@
             box-shadow: var(--shadow-purple);
         }
 
-        .levels-grid {
+        /* Compact Referral Levels */
+        .referral-levels-compact {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-2xl);
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--spacing-md);
             margin-bottom: var(--spacing-3xl);
-            text-align: left;
         }
 
-        .level-card {
+        .referral-level-compact {
             background: var(--gradient-elegant);
             border: 1px solid rgba(147, 51, 234, 0.2);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            text-align: center;
             transition: all var(--transition-normal);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-elegant);
-            position: relative;
-        }
-        
-        .level-card.locked {
-            background: rgba(10, 10, 10, 0.5);
-            border-color: rgba(128,128,128,0.2);
-        }
-        .level-card.locked .level-header,
-        .level-card.locked .level-requirements {
-             opacity: 0.5;
-        }
-        
-        .lock-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.2);
-            z-index: 5;
         }
 
-        .level-card:hover {
+        .referral-level-compact:hover {
             border-color: var(--primary-purple);
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-purple-lg);
-        }
-        
-        .level-card.locked:hover {
-             border-color: rgba(128,128,128,0.4);
-             transform: translateY(0);
-             box-shadow: var(--shadow-elegant);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-purple);
         }
 
-        .level-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-md);
-            border-bottom: 1px solid rgba(147, 51, 234, 0.1);
-        }
-        
-        .level-card.locked .level-header {
-            border-color: rgba(128,128,128,0.1);
-        }
-
-        .level-number {
-            width: 50px;
-            height: 50px;
+        .level-number-compact {
+            width: 40px;
+            height: 40px;
             background: var(--gradient-purple);
             border-radius: 50%;
             display: flex;
@@ -1273,47 +1101,22 @@
             justify-content: center;
             color: var(--white);
             font-weight: 700;
-            font-size: var(--font-size-xl);
+            font-size: var(--font-size-base);
             box-shadow: var(--shadow-purple);
-            flex-shrink: 0;
-        }
-        
-        .level-card.locked .level-number {
-            background: var(--gray-700);
-            box-shadow: none;
+            margin: 0 auto var(--spacing-sm);
         }
 
-        .level-commission {
-            font-size: var(--font-size-xl);
+        .level-commission-compact {
+            font-size: var(--font-size-lg);
             font-weight: 700;
             color: var(--primary-purple);
+            margin-bottom: var(--spacing-xs);
             font-family: var(--font-heading);
-            text-align: right;
         }
-        
-        .level-card.locked .level-commission {
+
+        .level-requirement-compact {
             color: var(--gray-400);
-        }
-
-        .level-requirements {
-            margin-bottom: var(--spacing-lg);
-            padding-top: var(--spacing-md);
-        }
-
-        .requirement {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
-            color: var(--gray-300);
-            font-size: var(--font-size-sm);
-        }
-
-        .requirement i {
-            color: var(--primary-purple);
-        }
-        .level-card.locked .requirement i {
-            color: var(--gray-500);
+            font-size: var(--font-size-xs);
         }
 
         /* Leadership Section */
@@ -1330,63 +1133,34 @@
             text-align: left;
         }
 
-        .leadership-grid {
+        /* Compact Leadership Levels */
+        .leadership-levels-compact {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--spacing-2xl);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
             margin-bottom: var(--spacing-3xl);
-            text-align: left;
         }
 
-        .leadership-card {
+        .leadership-level-compact {
             background: var(--gradient-elegant);
             border: 1px solid rgba(147, 51, 234, 0.2);
-            border-radius: var(--radius-2xl);
-            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
             transition: all var(--transition-normal);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-elegant);
-            position: relative;
-            text-align: center;
         }
-        
-        .leadership-card.locked {
-            background: rgba(10, 10, 10, 0.5);
-            border-color: rgba(128,128,128,0.2);
-        }
-        .leadership-card.locked .leadership-header,
-        .leadership-card.locked .leadership-requirements {
-             opacity: 0.5;
-        }
-        
-        .leadership-card:hover {
+
+        .leadership-level-compact:hover {
             border-color: var(--primary-purple);
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-purple-lg);
-        }
-        
-        .leadership-card.locked:hover {
-             border-color: rgba(128,128,128,0.4);
-             transform: translateY(0);
-             box-shadow: var(--shadow-elegant);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-purple);
         }
 
-        .leadership-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-md);
-            border-bottom: 1px solid rgba(147, 51, 234, 0.1);
-        }
-        
-        .leadership-card.locked .leadership-header {
-            border-color: rgba(128,128,128,0.1);
-        }
-
-        .leadership-level {
-            width: 70px;
-            height: 70px;
+        .leadership-level-number {
+            width: 50px;
+            height: 50px;
             background: var(--gradient-purple);
             border-radius: 50%;
             display: flex;
@@ -1394,55 +1168,30 @@
             justify-content: center;
             color: var(--white);
             font-weight: 700;
-            font-size: var(--font-size-2xl);
+            font-size: var(--font-size-lg);
             box-shadow: var(--shadow-purple);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .leadership-card.locked .leadership-level {
-            background: var(--gray-700);
-            box-shadow: none;
+            margin: 0 auto var(--spacing-sm);
         }
 
-        .leadership-title {
-            font-size: var(--font-size-xl);
+        .leadership-title-compact {
+            font-size: var(--font-size-lg);
             font-weight: 700;
             color: var(--white);
+            margin-bottom: var(--spacing-xs);
             font-family: var(--font-heading);
-            margin-bottom: var(--spacing-sm);
         }
 
-        .leadership-bonus {
-            font-size: var(--font-size-2xl);
+        .leadership-bonus-compact {
+            font-size: var(--font-size-xl);
             font-weight: 700;
             color: var(--primary-purple);
+            margin-bottom: var(--spacing-sm);
             font-family: var(--font-heading);
         }
-        
-        .leadership-card.locked .leadership-bonus {
+
+        .leadership-requirement-compact {
             color: var(--gray-400);
-        }
-
-        .leadership-requirements {
-            margin-bottom: var(--spacing-lg);
-            padding-top: var(--spacing-md);
-        }
-
-        .leadership-requirement {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
-            color: var(--gray-300);
-            font-size: var(--font-size-base);
-        }
-
-        .leadership-requirement i {
-            color: var(--primary-purple);
-        }
-        .leadership-card.locked .leadership-requirement i {
-            color: var(--gray-500);
+            font-size: var(--font-size-sm);
         }
 
         .bonus-claim-section {
@@ -1619,16 +1368,18 @@
         }
 
         .footer__content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: var(--spacing-3xl);
             margin-bottom: var(--spacing-2xl);
-            text-align: left;
+            text-align: center;
         }
 
         .footer__brand {
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: var(--spacing-md);
         }
 
@@ -1651,6 +1402,7 @@
         .footer__description {
             color: var(--gray-400);
             line-height: 1.6;
+            max-width: 600px;
         }
 
         .footer__social {
@@ -1679,36 +1431,50 @@
             box-shadow: var(--shadow-purple);
         }
 
-        .footer__links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-2xl);
-        }
-
-        .footer__column h4 {
-            color: var(--white);
-            margin-bottom: var(--spacing-lg);
-            font-size: var(--font-size-lg);
-            font-family: var(--font-heading);
-        }
-
-        .footer__column a {
-            display: block;
-            color: var(--gray-400);
-            text-decoration: none;
-            margin-bottom: var(--spacing-sm);
-            transition: color var(--transition-fast);
-        }
-
-        .footer__column a:hover {
-            color: var(--primary-purple);
-        }
-
         .footer__bottom {
             border-top: 1px solid rgba(147, 51, 234, 0.1);
             padding-top: var(--spacing-lg);
             text-align: center;
             color: var(--gray-500);
+        }
+
+        /* Program Info Section */
+        .program-info {
+            margin-top: var(--spacing-3xl);
+            text-align: center;
+        }
+
+        .program-info h3 {
+            color: var(--white);
+            margin-bottom: var(--spacing-lg);
+            font-family: var(--font-heading);
+            font-size: var(--font-size-2xl);
+        }
+
+        .info-box {
+            background: var(--gradient-elegant);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-2xl);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-elegant);
+            text-align: left;
+        }
+
+        .info-box p {
+            color: var(--gray-300);
+            line-height: 1.7;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .info-box ul {
+            color: var(--gray-300);
+            line-height: 1.7;
+            padding-left: var(--spacing-lg);
+        }
+
+        .info-box li {
+            margin-bottom: var(--spacing-sm);
         }
 
         /* Responsive Design */
@@ -1728,15 +1494,6 @@
 
             .hero__buttons {
                 justify-content: center;
-            }
-
-            .footer__content {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-2xl);
-                text-align: center;
-            }
-            .footer__brand {
-                align-items: center;
             }
         }
 
@@ -1804,10 +1561,6 @@
                 width: 100%;
             }
             
-            .statistics-container {
-                grid-template-columns: 1fr;
-            }
-
             .investment-plans {
                 grid-template-columns: 1fr;
             }
@@ -1839,8 +1592,8 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .levels-grid, .leadership-grid {
-                grid-template-columns: 1fr;
+            .referral-levels-compact {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
 
             .link-display {
@@ -1851,12 +1604,6 @@
                 flex-direction: column;
                 text-align: center;
                 gap: var(--spacing-lg);
-            }
-
-            .footer__links {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-xl);
-                text-align: center;
             }
         }
 
@@ -1880,6 +1627,10 @@
 
             .referral-stats, .leadership-stats {
                 grid-template-columns: 1fr;
+            }
+
+            .referral-levels-compact {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
         }
     </style>
@@ -1909,9 +1660,6 @@
                 <ul class="nav__list">
                     <li class="nav__item">
                         <a class="nav__link active" data-section="home">Home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a class="nav__link" data-section="statistics">Statistics</a>
                     </li>
                     <li class="nav__item">
                         <a class="nav__link" data-section="dashboard">Dashboard</a>
@@ -1958,7 +1706,7 @@
                         – Next Generation Investment Protocol
                     </h1>
                     <p class="hero__description">
-                        Experience premium decentralized finance with Nexagon's advanced investment protocol. Earn stable daily returns through our optimized ROI system, backed by a 15-level referral program and secure smart contract technology.
+                        Experience premium decentralized finance with Nexagon's advanced investment protocol. Earn stable daily returns through our optimized ROI system, backed by a 15-level referral program and secure smart contract technology
                     </p>
                     <div class="hero__buttons">
                         <button class="btn btn--primary" data-section="invest">
@@ -2003,50 +1751,6 @@
             </div>
         </section>
 
-        <!-- Real-time Blockchain Statistics Section -->
-        <section class="section" id="statistics" style="display: none;">
-            <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">Real-time Blockchain Statistics</h2>
-                    <p class="section__subtitle">We believe in absolute transparency. All data below is fetched directly from the smart contract.</p>
-                </div>
-                
-                <div class="statistics-container">
-                    <!-- Deposits Box -->
-                    <div class="stats-box">
-                        <div class="stats-box__header">
-                            <i class="fas fa-arrow-down"></i>
-                            <h3>Latest Deposits</h3>
-                        </div>
-                        <div class="stats-box__list" id="latest-deposits">
-                            <!-- Data will be populated by JavaScript -->
-                            <div class="stat-entry">
-                                <span class="stat-entry__address">Loading deposits...</span>
-                                <span class="stat-entry__time"></span>
-                                <span class="stat-entry__amount"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Withdrawals Box -->
-                    <div class="stats-box">
-                         <div class="stats-box__header">
-                            <i class="fas fa-arrow-up"></i>
-                            <h3>Latest Withdrawals</h3>
-                        </div>
-                         <div class="stats-box__list" id="latest-withdrawals">
-                            <!-- Data will be populated by JavaScript -->
-                            <div class="stat-entry">
-                                <span class="stat-entry__address">Loading withdrawals...</span>
-                                <span class="stat-entry__time"></span>
-                                <span class="stat-entry__amount"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
         <!-- Dashboard Section -->
         <section class="dashboard-section section" id="dashboard" style="display: none;">
             <div class="container">
@@ -2079,33 +1783,6 @@
                             <div class="stat-label">Pending Rewards</div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-arrow-down"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="totalWithdrawn">0 USDT</div>
-                            <div class="stat-label">Total Withdrawn</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="referralBonus">0 USDT</div>
-                            <div class="stat-label">Referral Earnings</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="leadershipBonus">0 USDT</div>
-                            <div class="stat-label">Leadership Bonus</div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="action-buttons" id="actionButtons" style="display: none;">
@@ -2116,14 +1793,6 @@
                     <button class="btn btn--outline" id="withdrawROI">
                         <i class="fas fa-download"></i>
                         Withdraw ROI
-                    </button>
-                    <button class="btn btn--outline" id="withdrawReferral">
-                        <i class="fas fa-gift"></i>
-                        Withdraw Referral
-                    </button>
-                    <button class="btn btn--outline" id="withdrawLeadership">
-                        <i class="fas fa-crown"></i>
-                        Withdraw Leadership
                     </button>
                 </div>
                 
@@ -2137,14 +1806,6 @@
                         <i class="fas fa-rocket"></i>
                         Start Investing
                     </button>
-                </div>
-
-                <!-- Investment History -->
-                <div class="investment-history" id="investmentHistory" style="display: none; margin-top: var(--spacing-3xl);">
-                    <h3 style="text-align: center; margin-bottom: var(--spacing-xl); color: var(--white);">Your Investment History</h3>
-                    <div id="investmentsList" class="stats-box">
-                        <!-- Investments will be populated here -->
-                    </div>
                 </div>
             </div>
         </section>
@@ -2199,22 +1860,6 @@
                             <small>If you were referred by someone, enter their wallet address here</small>
                         </div>
 
-                        <div class="investment-summary">
-                            <h3>Investment Summary</h3>
-                            <div class="summary-item">
-                                <span>Investment Amount:</span>
-                                <span id="summaryAmount">0 USDT</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Platform Fee (10%):</span>
-                                <span id="summaryFee">0 USDT</span>
-                            </div>
-                            <div class="summary-item total">
-                                <span>Total to Pay:</span>
-                                <span id="summaryTotal">0 USDT</span>
-                            </div>
-                        </div>
-
                         <button class="btn btn--primary btn-lg" id="confirmInvestment" style="width: 100%;">
                             <i class="fas fa-check-circle"></i>
                             Confirm Investment
@@ -2260,16 +1905,7 @@
                 <div class="referral-stats" id="referralStats" style="display: none;">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="totalTeam">0</div>
-                            <div class="stat-label">Total Team</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-user-plus"></i>
+                            <i class="fas fa-gift"></i>
                         </div>
                         <div class="stat-info">
                             <div class="stat-value" id="referralBonusAmount">0 USDT</div>
@@ -2278,22 +1914,29 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-crown"></i>
+                            <i class="fas fa-layer-group"></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-value" id="leadershipBonusAmount">0 USDT</div>
-                            <div class="stat-label">Leadership Bonus</div>
+                            <div class="stat-value" id="referralLevel">0</div>
+                            <div class="stat-label">Current Level</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-gift"></i>
+                            <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-value" id="referralLevel">0</div>
-                            <div class="stat-label">Your Level</div>
+                            <div class="stat-value" id="referralTeamCount">0</div>
+                            <div class="stat-label">Active Team Members</div>
                         </div>
                     </div>
+                </div>
+
+                <div class="action-buttons" id="referralActionButtons" style="display: none;">
+                    <button class="btn btn--outline" id="withdrawReferral">
+                        <i class="fas fa-download"></i>
+                        Withdraw Referral
+                    </button>
                 </div>
 
                 <div class="referral-link-container" id="referralLinkSection" style="display: none;">
@@ -2319,38 +1962,24 @@
                     </div>
                 </div>
 
-                <div class="bonus-claim-section" id="bonusClaimSection" style="display: none;">
-                    <div class="claim-card">
-                        <div class="claim-info">
-                            <h3>Available Referral Bonus</h3>
-                            <p>You have referral earnings available for withdrawal</p>
-                        </div>
-                        <div class="bonus-amount" id="availableBonus">0 USDT</div>
-                        <button class="btn btn--primary" id="claimReferralBonus">
-                            <i class="fas fa-gift"></i>
-                            Claim Bonus
-                        </button>
-                    </div>
-                </div>
-
-                <div class="bonus-claim-section" id="leadershipClaimSection" style="display: none;">
-                    <div class="claim-card">
-                        <div class="claim-info">
-                            <h3>Available Leadership Bonus</h3>
-                            <p>You have leadership earnings available for withdrawal</p>
-                        </div>
-                        <div class="bonus-amount" id="availableLeadership">0 USDT</div>
-                        <button class="btn btn--primary" id="claimLeadershipBonus">
-                            <i class="fas fa-crown"></i>
-                            Claim Leadership
-                        </button>
-                    </div>
-                </div>
-
-                <div class="levels-grid" id="referralLevelsGrid">
+                <div class="referral-levels-compact" id="referralLevelsCompact">
                     <!-- Levels will be populated by JavaScript -->
                 </div>
 
+                <div class="program-info">
+                    <h3>How Referral Program Works</h3>
+                    <div class="info-box">
+                        <p>
+                            The Referral Program rewards you for bringing new investors to the platform. With 15 levels of referral commissions, you can earn from your direct referrals and their extended network!
+                        </p>
+                        <ul>
+                            <li>Each level requires a minimum investment amount to unlock</li>
+                            <li>You earn commissions from your referrals' investments based on your current level</li>
+                            <li>Higher levels provide access to deeper levels in your referral network</li>
+                            <li>Your referral level is automatically updated as your investment grows</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -2368,15 +1997,6 @@
                 </div>
 
                 <div class="leadership-stats" id="leadershipStats" style="display: none;">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="leadershipTeamCount">0</div>
-                            <div class="stat-label">Active Team Members</div>
-                        </div>
-                    </div>
                     <div class="stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-crown"></i>
@@ -2397,43 +2017,36 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-info">
-                            <div class="stat-value" id="nextLevelProgress">0%</div>
-                            <div class="stat-label">Next Level Progress</div>
+                            <div class="stat-value" id="leadershipTeamCount">0</div>
+                            <div class="stat-label">Active Team Members</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="leadership-grid" id="leadershipLevelsGrid">
+                <div class="action-buttons" id="leadershipActionButtons" style="display: none;">
+                    <button class="btn btn--outline" id="withdrawLeadership">
+                        <i class="fas fa-download"></i>
+                        Withdraw Leadership
+                    </button>
+                </div>
+
+                <div class="leadership-levels-compact" id="leadershipLevelsCompact">
                     <!-- Leadership levels will be populated by JavaScript -->
                 </div>
 
-                <div class="bonus-claim-section" id="leadershipBonusClaim" style="display: none;">
-                    <div class="claim-card">
-                        <div class="claim-info">
-                            <h3>Available Leadership Bonus</h3>
-                            <p>You have leadership earnings available for withdrawal. Build a stronger team to unlock higher bonuses!</p>
-                        </div>
-                        <div class="bonus-amount" id="availableLeadershipBonus">0 USDT</div>
-                        <button class="btn btn--primary" id="claimLeadershipBonusMain">
-                            <i class="fas fa-crown"></i>
-                            Claim Leadership Bonus
-                        </button>
-                    </div>
-                </div>
-
-                <div class="leadership-info" style="margin-top: var(--spacing-3xl); text-align: center;">
-                    <h3 style="color: var(--white); margin-bottom: var(--spacing-lg);">How Leadership Program Works</h3>
-                    <div class="stats-box" style="text-align: left;">
-                        <p style="color: var(--gray-300); line-height: 1.7; margin-bottom: var(--spacing-md);">
-                            The Leadership Program rewards you for building and maintaining an active team. As your team grows and remains active, you unlock higher leadership levels with increased bonus rates.
+                <div class="program-info">
+                    <h3>How Leadership Program Works</h3>
+                    <div class="info-box">
+                        <p>
+                            The Leadership Program rewards you for building and maintaining an active team. As your team grows and remains active, you unlock higher leadership levels with increased bonus rates!
                         </p>
-                        <ul style="color: var(--gray-300); line-height: 1.7; padding-left: var(--spacing-lg);">
-                            <li style="margin-bottom: var(--spacing-sm);">Each level requires a minimum number of active team members</li>
-                            <li style="margin-bottom: var(--spacing-sm);">Leadership bonuses are calculated based on your team's ROI withdrawals</li>
-                            <li style="margin-bottom: var(--spacing-sm);">Higher levels provide significantly increased bonus percentages</li>
+                        <ul>
+                            <li>Each level requires a minimum number of active team members</li>
+                            <li>Leadership bonuses are calculated based on your team's ROI withdrawals</li>
+                            <li>Higher levels provide significantly increased bonus percentages</li>
                             <li>Your leadership level is automatically updated as your team grows</li>
                         </ul>
                     </div>
@@ -2554,7 +2167,7 @@
                         <span>Nexagon</span>
                     </div>
                     <p class="footer__description">
-                        Experience premium decentralized finance with Nexagon's advanced investment protocol. Earn stable daily returns through our optimized ROI system, backed by a 15-level referral program and secure smart contract technology.
+                        Experience premium decentralized finance with Nexagon's advanced investment protocol. Earn stable daily returns through our optimized ROI system, backed by a 15-level referral program and secure smart contract technology
                     </p>
                     <div class="footer__social">
                         <a href="#" class="social__link">
@@ -2568,30 +2181,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="footer__links">
-                    <div class="footer__column">
-                        <h4>Platform</h4>
-                        <a class="footer-link" data-section="home">Home</a>
-                        <a class="footer-link" data-section="statistics">Statistics</a>
-                        <a class="footer-link" data-section="invest">Invest</a>
-                        <a class="footer-link" data-section="referral">Referral</a>
-                        <a class="footer-link" data-section="leadership">Leadership</a>
-                        <a class="footer-link" data-section="dashboard">Dashboard</a>
-                    </div>
-                    <div class="footer__column">
-                        <h4>Resources</h4>
-                        <a href="https://bscscan.com/address/0xDe4F0C2F829E7fF547DA3958854d84E143985D5C">Contract</a>
-                        <a class="footer-link" data-section="faq">FAQ</a>
-                    </div>
-                    <div class="footer__column">
-                        <h4>Support</h4>
-                        <a href="#">Contact Us</a>
-                        <a href="#">Community</a>
-                    </div>
-                </div>
             </div>
             <div class="footer__bottom">
-                <p>&copy; 2025 Nexagon. All rights reserved.</p>
+                <p>&copy; 2025 Nexagon</p>
             </div>
         </div>
     </footer>
@@ -2633,7 +2225,6 @@
 
         const sections = {
             home: document.getElementById('home'),
-            statistics: document.getElementById('statistics'),
             dashboard: document.getElementById('dashboard'),
             invest: document.getElementById('invest'),
             referral: document.getElementById('referral'),
@@ -2649,8 +2240,8 @@
             checkPreloader();
             checkURLForReferral();
             setupFAQ();
-            generateReferralLevels(); // Initial generation for non-logged-in users
-            generateLeadershipLevels(); // Initial generation for non-logged-in users
+            generateReferralLevelsCompact(); // Initial generation for non-logged-in users
+            generateLeadershipLevelsCompact(); // Initial generation for non-logged-in users
         });
 
         function setupFAQ() {
@@ -2802,9 +2393,6 @@
             document.getElementById('shareTelegram').addEventListener('click', () => shareOnSocial('telegram'));
             document.getElementById('shareTwitter').addEventListener('click', () => shareOnSocial('twitter'));
             document.getElementById('shareWhatsapp').addEventListener('click', () => shareOnSocial('whatsapp'));
-            document.getElementById('claimReferralBonus').addEventListener('click', withdrawReferral);
-            document.getElementById('claimLeadershipBonus').addEventListener('click', withdrawLeadership);
-            document.getElementById('claimLeadershipBonusMain').addEventListener('click', withdrawLeadership);
 
             if (window.ethereum) {
                 window.ethereum.on('accountsChanged', (accounts) => {
@@ -2813,8 +2401,8 @@
                     if(userAccount) loadUserData();
                     else {
                         showWalletAlerts();
-                        generateReferralLevels(); // Regenerate levels for non-logged-in view
-                        generateLeadershipLevels(); // Regenerate levels for non-logged-in view
+                        generateReferralLevelsCompact(); // Regenerate levels for non-logged-in view
+                        generateLeadershipLevelsCompact(); // Regenerate levels for non-logged-in view
                     }
                 });
                 window.ethereum.on('chainChanged', () => window.location.reload());
@@ -2850,7 +2438,7 @@
 
         function showWalletAlerts() {
             ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert', 'leadershipWalletAlert'].forEach(id => document.getElementById(id).style.display = 'flex');
-            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'investmentHistory', 'referralStats', 'referralLinkSection', 'bonusClaimSection', 'leadershipClaimSection', 'leadershipStats', 'leadershipBonusClaim'].forEach(id => {
+            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'referralStats', 'referralLinkSection', 'referralActionButtons', 'leadershipStats', 'leadershipActionButtons'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'none';
             });
@@ -2863,7 +2451,9 @@
                 if (el) el.style.display = 'grid';
             });
             document.getElementById('actionButtons').style.display = 'flex';
-             document.getElementById('referralLinkSection').style.display = 'block';
+            document.getElementById('referralActionButtons').style.display = 'flex';
+            document.getElementById('leadershipActionButtons').style.display = 'flex';
+            document.getElementById('referralLinkSection').style.display = 'block';
         }
 
         async function loadUserData() {
@@ -2877,16 +2467,10 @@
                 
                 document.getElementById('totalInvested').textContent = `${formatUSDT(userInfo.totalInvested)} USDT`;
                 document.getElementById('pendingRewards').textContent = `${formatUSDT(pendingRewards)} USDT`;
-                document.getElementById('totalWithdrawn').textContent = `${formatUSDT(userInfo.totalWithdrawn)} USDT`;
-                document.getElementById('referralBonus').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
-                document.getElementById('leadershipBonus').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
                 document.getElementById('referralBonusAmount').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
-                document.getElementById('leadershipBonusAmount').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
-                document.getElementById('leadershipTeamCount').textContent = teamCount;
                 document.getElementById('leadershipBonusStats').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
-                document.getElementById('availableBonus').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
-                document.getElementById('availableLeadership').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
-                document.getElementById('availableLeadershipBonus').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
+                document.getElementById('referralTeamCount').textContent = teamCount;
+                document.getElementById('leadershipTeamCount').textContent = teamCount;
                 
                 // Calculate referral level based on total invested
                 let userLevel = 0;
@@ -2911,91 +2495,22 @@
                     }
                 }
                 document.getElementById('currentLeadershipLevel').textContent = leadershipLevel;
-                
-                // Calculate next level progress
-                let nextLevelProgress = 0;
-                if (leadershipLevel < 3) {
-                    const currentRequirement = leadershipLevel > 0 ? parseInt(leadershipRequirements[leadershipLevel-1]) : 0;
-                    const nextRequirement = parseInt(leadershipRequirements[leadershipLevel]);
-                    nextLevelProgress = Math.min(100, Math.round((parseInt(teamCount) - currentRequirement) / (nextRequirement - currentRequirement) * 100));
-                } else {
-                    nextLevelProgress = 100;
-                }
-                document.getElementById('nextLevelProgress').textContent = `${nextLevelProgress}%`;
-                
-                // Show/hide bonus claim sections
-                if (parseInt(userInfo.referralBonus) > 0) {
-                    document.getElementById('bonusClaimSection').style.display = 'block';
-                } else {
-                    document.getElementById('bonusClaimSection').style.display = 'none';
-                }
-
-                if (parseInt(userInfo.leadershipBonus) > 0) {
-                    document.getElementById('leadershipClaimSection').style.display = 'block';
-                    document.getElementById('leadershipBonusClaim').style.display = 'block';
-                } else {
-                    document.getElementById('leadershipClaimSection').style.display = 'none';
-                    document.getElementById('leadershipBonusClaim').style.display = 'none';
-                }
 
                 const investments = await contract.methods.getUserInvestments(userAccount).call();
                 document.getElementById('noInvestmentsMessage').style.display = investments.planIds.length === 0 ? 'flex' : 'none';
-                document.getElementById('investmentHistory').style.display = investments.planIds.length > 0 ? 'block' : 'none';
-
-                // Display investment history
-                displayInvestmentHistory(investments);
 
                 generateReferralLink();
                 // Ensure referral link section is visible after connecting wallet and loading data
                 document.getElementById('referralLinkSection').style.display = 'block';
                 
                 // Regenerate referral levels with user data
-                generateReferralLevels(userInfo.totalInvested);
+                generateReferralLevelsCompact(userInfo.totalInvested);
                 // Regenerate leadership levels with user data
-                generateLeadershipLevels(teamCount);
+                generateLeadershipLevelsCompact(teamCount);
 
             } catch (error) {
                 console.error('Error loading user data:', error);
             }
-        }
-
-        function displayInvestmentHistory(investments) {
-            const investmentsList = document.getElementById('investmentsList');
-            if (!investmentsList) return;
-
-            if (investments.planIds.length === 0) {
-                investmentsList.innerHTML = '<p style="text-align: center; color: var(--gray-400);">No investments found</p>';
-                return;
-            }
-
-            let html = '';
-            for (let i = 0; i < investments.planIds.length; i++) {
-                const planId = investments.planIds[i];
-                const amount = web3.utils.fromWei(investments.amounts[i], 'ether');
-                const startTime = new Date(investments.startTimes[i] * 1000).toLocaleDateString();
-                const lastClaimTime = investments.lastClaimTimes[i] > 0 ? 
-                    new Date(investments.lastClaimTimes[i] * 1000).toLocaleDateString() : 'Never';
-                const totalClaimed = web3.utils.fromWei(investments.totalClaimeds[i], 'ether');
-                const isActive = investments.actives[i];
-                const pendingRewards = web3.utils.fromWei(investments.pendingRewards[i], 'ether');
-
-                const planNames = ['Gold Plan', 'Platinum Plan', 'Diamond Plan'];
-                
-                html += `
-                    <div class="stat-entry">
-                        <span class="stat-entry__address">${planNames[planId]}</span>
-                        <span class="stat-entry__time">Started: ${startTime}</span>
-                        <span class="stat-entry__amount">${amount} USDT</span>
-                        <span class="stat-entry__time">Last Claim: ${lastClaimTime}</span>
-                        <span class="stat-entry__amount">Claimed: ${totalClaimed} USDT</span>
-                        <span class="stat-entry__time">Pending: ${pendingRewards} USDT</span>
-                        <span class="stat-entry__amount" style="color: ${isActive ? '#10B981' : '#EF4444'}">
-                            ${isActive ? 'Active' : 'Completed'}
-                        </span>
-                    </div>
-                `;
-            }
-            investmentsList.innerHTML = html;
         }
 
         function generateReferralLink() {
@@ -3009,9 +2524,9 @@
             const plansContainer = document.getElementById('investmentPlans');
             if (!plansContainer) return;
             const plans = [
-                {id: 0, name: 'Gold Plan', roi: '1.6% Daily', range: '10 - 100 USDT', duration: '7 Days', total: '112% Total ROI', features: ['1.6% Daily ROI', '7 Days Duration', '112% Total Returns', '15-Level Referral'], featured: false},
-                {id: 1, name: 'Platinum Plan', roi: '0.9% Daily', range: '50 - 100 USDT', duration: '14 Days', total: '126% Total ROI', features: ['0.9% Daily ROI', '14 Days Duration', '126% Total Returns', '15-Level Referral'], featured: true},
-                {id: 2, name: 'Diamond Plan', roi: '0.5% Daily', range: '100+ USDT', duration: '30 Days', total: '150% Total ROI', features: ['0.5% Daily ROI', '30 Days Duration', '150% Total Returns', '15-Level Referral'], featured: false}
+                {id: 0, name: 'Gold Plan', roi: '16% Daily', range: '10 - 100 USDT', duration: '7 Days', total: '112% Total ROI', features: ['16% Daily ROI', '7 Days Duration', '112% Total Returns', '15-Level Referral'], featured: false},
+                {id: 1, name: 'Platinum Plan', roi: '9% Daily', range: '50 - 100 USDT', duration: '14 Days', total: '126% Total ROI', features: ['9% Daily ROI', '14 Days Duration', '126% Total Returns', '15-Level Referral'], featured: true},
+                {id: 2, name: 'Diamond Plan', roi: '5% Daily', range: '100+ USDT', duration: '30 Days', total: '150% Total ROI', features: ['5% Daily ROI', '30 Days Duration', '150% Total Returns', '15-Level Referral'], featured: false}
             ];
             plansContainer.innerHTML = plans.map(plan => `
                 <div class="plan-card ${plan.featured ? 'featured' : ''}" data-plan-id="${plan.id}">
@@ -3033,9 +2548,9 @@
         function selectPlan(planId) {
             if (!userAccount) return showNotification('Please connect your wallet first!', 'error');
             const plansData = [
-                { id: 0, name: 'Gold Plan', roi: '1.6% Daily', min: 10, max: 100 },
-                { id: 1, name: 'Platinum Plan', roi: '0.9% Daily', min: 50, max: 100 },
-                { id: 2, name: 'Diamond Plan', roi: '0.5% Daily', min: 100, max: Infinity }
+                { id: 0, name: 'Gold Plan', roi: '16% Daily', min: 10, max: 100 },
+                { id: 1, name: 'Platinum Plan', roi: '9% Daily', min: 50, max: 100 },
+                { id: 2, name: 'Diamond Plan', roi: '5% Daily', min: 100, max: Infinity }
             ];
             selectedPlan = plansData.find(p => p.id === planId);
             if (selectedPlan) showInvestmentForm();
@@ -3184,8 +2699,8 @@
             if (urls[platform]) window.open(urls[platform], '_blank');
         }
 
-        async function generateReferralLevels(userTotalInvested = '0') {
-            const levelsContainer = document.getElementById('referralLevelsGrid');
+        function generateReferralLevelsCompact(userTotalInvested = '0') {
+            const levelsContainer = document.getElementById('referralLevelsCompact');
             if (!levelsContainer) return;
 
             const userInvestedBN = new BigNumber(userTotalInvested);
@@ -3209,29 +2724,18 @@
             ];
             
             levelsContainer.innerHTML = levels.map(level => {
-                const isLocked = userInvestedBN.isLessThan(new BigNumber(level.requirementWei));
-                const lockClass = isLocked ? 'locked' : 'unlocked';
-                
                 return `
-                    <div class="level-card ${lockClass}">
-                        ${isLocked ? '<div class="lock-icon"><i class="fas fa-lock"></i></div>' : ''}
-                        <div class="level-header">
-                            <div class="level-number">${level.level}</div>
-                            <div class="level-commission">${level.commission} Commission</div>
-                        </div>
-                        <div class="level-requirements">
-                            <div class="requirement">
-                                <i class="fas fa-wallet"></i>
-                                <span>Minimum Invest: ${level.requirement} USDT</span>
-                            </div>
-                        </div>
+                    <div class="referral-level-compact">
+                        <div class="level-number-compact">${level.level}</div>
+                        <div class="level-commission-compact">${level.commission}</div>
+                        <div class="level-requirement-compact">${level.requirement} USDT</div>
                     </div>
                 `;
             }).join('');
         }
 
-        async function generateLeadershipLevels(teamCount = 0) {
-            const levelsContainer = document.getElementById('leadershipLevelsGrid');
+        function generateLeadershipLevelsCompact(teamCount = 0) {
+            const levelsContainer = document.getElementById('leadershipLevelsCompact');
             if (!levelsContainer) return;
 
             const teamCountNum = parseInt(teamCount);
@@ -3243,27 +2747,12 @@
             ];
             
             levelsContainer.innerHTML = levels.map(level => {
-                const isLocked = teamCountNum < parseInt(level.requirement);
-                const lockClass = isLocked ? 'locked' : 'unlocked';
-                
                 return `
-                    <div class="leadership-card ${lockClass}">
-                        ${isLocked ? '<div class="lock-icon"><i class="fas fa-lock"></i></div>' : ''}
-                        <div class="leadership-header">
-                            <div class="leadership-level">${level.level}</div>
-                            <div class="leadership-title">${level.title}</div>
-                            <div class="leadership-bonus">${level.bonus} Bonus</div>
-                        </div>
-                        <div class="leadership-requirements">
-                            <div class="leadership-requirement">
-                                <i class="fas fa-users"></i>
-                                <span>${level.requirement} Active Team Members</span>
-                            </div>
-                            <div class="leadership-requirement">
-                                <i class="fas fa-info-circle"></i>
-                                <span>${level.description}</span>
-                            </div>
-                        </div>
+                    <div class="leadership-level-compact">
+                        <div class="leadership-level-number">${level.level}</div>
+                        <div class="leadership-title-compact">${level.title}</div>
+                        <div class="leadership-bonus-compact">${level.bonus}</div>
+                        <div class="leadership-requirement-compact">${level.requirement} Members</div>
                     </div>
                 `;
             }).join('');
