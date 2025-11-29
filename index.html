@@ -800,17 +800,6 @@
                 <div class="referral-levels-compact" id="referralLevelsCompact">
                     <!-- JS Generated -->
                 </div>
-
-                <!-- Team Members Section -->
-                <div class="team-members-container" id="referralTeamMembers" style="display: none;">
-                    <div class="team-members-header">
-                        <h3 style="margin: 0;">Your Team Members</h3>
-                        <div class="team-count" id="referralTeamCountBadge">0 Members</div>
-                    </div>
-                    <div class="team-members-list" id="referralTeamMembersList">
-                        <!-- Team members will be populated here -->
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -859,17 +848,6 @@
 
                 <div class="leadership-levels-compact" id="leadershipLevelsCompact">
                     <!-- JS Generated -->
-                </div>
-
-                <!-- Team Members Section -->
-                <div class="team-members-container" id="leadershipTeamMembers" style="display: none;">
-                    <div class="team-members-header">
-                        <h3 style="margin: 0;">Your Leadership Team</h3>
-                        <div class="team-count" id="leadershipTeamCountBadge">0 Members</div>
-                    </div>
-                    <div class="team-members-list" id="leadershipTeamMembersList">
-                        <!-- Team members will be populated here -->
-                    </div>
                 </div>
             </div>
         </section>
@@ -1220,7 +1198,7 @@
 
         function showWalletAlerts() {
             ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert', 'leadershipWalletAlert'].forEach(id => document.getElementById(id).style.display = 'flex');
-            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'referralStats', 'referralLinkSection', 'referralActionButtons', 'leadershipStats', 'leadershipActionButtons', 'referralTeamMembers', 'leadershipTeamMembers'].forEach(id => {
+            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'referralStats', 'referralLinkSection', 'referralActionButtons', 'leadershipStats', 'leadershipActionButtons'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'none';
             });
@@ -1236,8 +1214,6 @@
             document.getElementById('referralActionButtons').style.display = 'flex';
             document.getElementById('leadershipActionButtons').style.display = 'flex';
             document.getElementById('referralLinkSection').style.display = 'block';
-            document.getElementById('referralTeamMembers').style.display = 'block';
-            document.getElementById('leadershipTeamMembers').style.display = 'block';
         }
 
         async function loadUserData() {
@@ -1276,78 +1252,37 @@
 
                 generateReferralLink();
                 document.getElementById('referralLinkSection').style.display = 'block';
-                generateReferralLevelsCompact(userInfo.totalInvested);
+                
+                // Load referral counts for each level
+                await loadReferralLevelsWithCounts();
+                
                 generateLeadershipLevelsCompact(teamCount);
                 startWithdrawTimer();
-
-                // Load team members
-                await loadTeamMembers();
 
             } catch (error) { console.error('Error loading user data', error); }
         }
 
-        async function loadTeamMembers() {
+        async function loadReferralLevelsWithCounts() {
             if (!contract || !userAccount) return;
             
             try {
-                // Get team members from contract
-                const teamData = await contract.methods.getTeamMembers(userAccount).call();
-                const teamAddresses = teamData[0];
-                const teamLevels = teamData[1];
-                
-                // Update team count badges
-                document.getElementById('referralTeamCountBadge').textContent = `${teamAddresses.length} Members`;
-                document.getElementById('leadershipTeamCountBadge').textContent = `${teamAddresses.length} Members`;
-                
-                // Populate referral team members list
-                const referralTeamList = document.getElementById('referralTeamMembersList');
-                referralTeamList.innerHTML = '';
-                
-                if (teamAddresses.length === 0) {
-                    referralTeamList.innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-users"></i></div><h3>No Team Members Yet</h3><p style="color: var(--text-muted);">Share your referral link to start building your team</p></div>';
-                } else {
-                    teamAddresses.forEach((address, index) => {
-                        const level = teamLevels[index];
-                        const memberElement = document.createElement('div');
-                        memberElement.className = 'team-member-item';
-                        memberElement.innerHTML = `
-                            <div class="member-info">
-                                <div class="member-address">${address.substring(0, 6)}...${address.substring(address.length - 4)}</div>
-                                <div class="member-investment">Level ${level}</div>
-                            </div>
-                            <div class="member-level">Level ${level}</div>
-                        `;
-                        referralTeamList.appendChild(memberElement);
-                    });
+                const referralCounts = [];
+                // Get referral counts for each level
+                for (let i = 0; i < 15; i++) {
+                    try {
+                        const count = await contract.methods.getReferralsCountByLevel(userAccount, i + 1).call();
+                        referralCounts.push(parseInt(count));
+                    } catch (error) {
+                        referralCounts.push(0);
+                    }
                 }
                 
-                // Populate leadership team members list (same data)
-                const leadershipTeamList = document.getElementById('leadershipTeamMembersList');
-                leadershipTeamList.innerHTML = '';
-                
-                if (teamAddresses.length === 0) {
-                    leadershipTeamList.innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-users"></i></div><h3>No Team Members Yet</h3><p style="color: var(--text-muted);">Share your referral link to start building your team</p></div>';
-                } else {
-                    teamAddresses.forEach((address, index) => {
-                        const level = teamLevels[index];
-                        const memberElement = document.createElement('div');
-                        memberElement.className = 'team-member-item';
-                        memberElement.innerHTML = `
-                            <div class="member-info">
-                                <div class="member-address">${address.substring(0, 6)}...${address.substring(address.length - 4)}</div>
-                                <div class="member-investment">Level ${level}</div>
-                            </div>
-                            <div class="member-level">Level ${level}</div>
-                        `;
-                        leadershipTeamList.appendChild(memberElement);
-                    });
-                }
-                
+                generateReferralLevelsCompactWithCounts(referralCounts);
             } catch (error) {
-                console.error('Error loading team members:', error);
-                // Fallback if getTeamMembers is not available in contract
-                document.getElementById('referralTeamMembersList').innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Team Data Unavailable</h3><p style="color: var(--text-muted);">Team member data is not available at this time</p></div>';
-                document.getElementById('leadershipTeamMembersList').innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Team Data Unavailable</h3><p style="color: var(--text-muted);">Team member data is not available at this time</p></div>';
+                console.error('Error loading referral counts:', error);
+                // Fallback if function not available
+                const emptyCounts = Array(15).fill(0);
+                generateReferralLevelsCompactWithCounts(emptyCounts);
             }
         }
 
@@ -1488,28 +1423,50 @@
             navigator.clipboard.writeText(document.getElementById('referralLink').value).then(() => showNotification('Copied!', 'success'));
         }
 
-        function generateReferralLevelsCompact(userTotalInvested = '0') {
+        function generateReferralLevelsCompactWithCounts(referralCounts = Array(15).fill(0)) {
             const levelsContainer = document.getElementById('referralLevelsCompact');
             if (!levelsContainer) return;
             const levels = [
-                { l: 1, c: '15%', r: '10' }, { l: 2, c: '10%', r: '50' }, { l: 3, c: '5%', r: '100' }, { l: 4, c: '5%', r: '150' }, { l: 5, c: '3%', r: '200' },
-                { l: 6, c: '3%', r: '250' }, { l: 7, c: '3%', r: '300' }, { l: 8, c: '2%', r: '350' }, { l: 9, c: '2%', r: '400' }, { l: 10, c: '2%', r: '450' },
-                { l: 11, c: '1%', r: '500' }, { l: 12, c: '1%', r: '550' }, { l: 13, c: '1%', r: '600' }, { l: 14, c: '1%', r: '650' }, { l: 15, c: '1%', r: '700' }
+                { l: 1, c: '15%', r: '10', members: referralCounts[0] },
+                { l: 2, c: '10%', r: '50', members: referralCounts[1] },
+                { l: 3, c: '5%', r: '100', members: referralCounts[2] },
+                { l: 4, c: '5%', r: '150', members: referralCounts[3] },
+                { l: 5, c: '3%', r: '200', members: referralCounts[4] },
+                { l: 6, c: '3%', r: '250', members: referralCounts[5] },
+                { l: 7, c: '3%', r: '300', members: referralCounts[6] },
+                { l: 8, c: '2%', r: '350', members: referralCounts[7] },
+                { l: 9, c: '2%', r: '400', members: referralCounts[8] },
+                { l: 10, c: '2%', r: '450', members: referralCounts[9] },
+                { l: 11, c: '1%', r: '500', members: referralCounts[10] },
+                { l: 12, c: '1%', r: '550', members: referralCounts[11] },
+                { l: 13, c: '1%', r: '600', members: referralCounts[12] },
+                { l: 14, c: '1%', r: '650', members: referralCounts[13] },
+                { l: 15, c: '1%', r: '700', members: referralCounts[14] }
             ];
             levelsContainer.innerHTML = levels.map(level => `
                 <div class="referral-level-compact">
                     <div class="level-number-compact">${level.l}</div>
                     <div class="level-commission-compact">${level.c}</div>
                     <div class="level-requirement-compact">${level.r} USDT</div>
+                    <div class="level-members-compact" style="font-size: 0.7rem; color: var(--cyan-glow); margin-top: 4px;">
+                        Members: ${level.members}
+                    </div>
                 </div>
             `).join('');
+        }
+
+        function generateReferralLevelsCompact() {
+            // Initial empty state
+            generateReferralLevelsCompactWithCounts(Array(15).fill(0));
         }
 
         function generateLeadershipLevelsCompact(teamCount = 0) {
             const levelsContainer = document.getElementById('leadershipLevelsCompact');
             if (!levelsContainer) return;
             const levels = [
-                { l: 1, t: 'Leader', b: '3%', r: '200' }, { l: 2, t: 'Senior', b: '7%', r: '500' }, { l: 3, t: 'Executive', b: '10%', r: '1000' }
+                { l: 1, t: 'Leader', b: '3%', r: '200' },
+                { l: 2, t: 'Senior', b: '7%', r: '500' },
+                { l: 3, t: 'Executive', b: '10%', r: '1000' }
             ];
             levelsContainer.innerHTML = levels.map(level => `
                 <div class="leadership-level-compact">
