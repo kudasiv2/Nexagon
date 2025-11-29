@@ -441,6 +441,16 @@
             .nav__list { flex-direction: column; gap: 20px; width: 100%; margin-bottom: 30px; }
             .nav__toggle { display: block; }
             .section__title { font-size: 2.5rem; }
+            .hero__title { font-size: 2.5rem; }
+            .hero__description { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title { font-size: 2rem; }
+            .hero__buttons { flex-direction: column; width: 100%; }
+            .hero__buttons .btn { width: 100%; }
+            .section { padding: 80px 0; }
+            .section__title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -648,13 +658,6 @@
                             <label for="referrerAddress">Referrer Address (Optional)</label>
                             <input type="text" id="referrerAddress" class="form-input" placeholder="0x...">
                         </div>
-                        
-                        <div style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; justify-content: space-between;">
-                             <span>Fee (10%):</span> <span id="summaryFee" style="color:white;">0.00 USDT</span>
-                        </div>
-                         <div style="margin-bottom: 30px; font-size: 1.1rem; color: white; display: flex; justify-content: space-between; font-weight: 600;">
-                             <span>Total Pay:</span> <span id="summaryTotal">0.00 USDT</span>
-                        </div>
 
                         <button class="btn btn--primary btn-lg" id="confirmInvestment" style="width: 100%;">
                             <i class="fas fa-check-circle"></i> Confirm Investment
@@ -722,9 +725,9 @@
                 <div class="referral-link-container" id="referralLinkSection" style="display: none; text-align: center;">
                     <h2 style="margin-bottom: 10px; font-size: 1.5rem;">Your Referral Link</h2>
                     <p style="color: var(--text-muted); margin-bottom: 20px;">Share this link to grow your network</p>
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                        <input type="text" id="referralLink" class="link-input" readonly>
-                        <button class="btn btn--primary" id="copyLink"><i class="fas fa-copy"></i></button>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <input type="text" id="referralLink" class="link-input" readonly style="flex: 1;">
+                        <button class="btn btn--primary" id="copyLink"><i class="fas fa-copy"></i> Copy</button>
                     </div>
                     <div class="social-share" style="justify-content: center; display: flex; gap: 10px;">
                         <button class="btn btn--outline btn-sm" id="shareTelegram"><i class="fab fa-telegram"></i></button>
@@ -767,6 +770,13 @@
                             <div class="stat-label">Rank</div>
                         </div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="leadershipTeamCount">0</div>
+                            <div class="stat-label">Team Members</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="action-buttons" id="leadershipActionButtons" style="display: none;">
@@ -785,8 +795,8 @@
         <section class="section" id="faq" style="display: none;">
             <div class="container" style="max-width: 800px;">
                 <div class="section__header">
-                    <h2 class="section__title">FAQ</h2>
-                    <p class="section__subtitle">Common questions about Nexagon</p>
+                    <h2 class="section__title">Frequently Asked Questions</h2>
+                    <p class="section__subtitle">Find answers to common questions about Nexagon</p>
                 </div>
 
                 <div class="faq-container">
@@ -796,10 +806,11 @@
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>To start investing, connect your wallet, choose an investment plan, deposit USDT, and begin earning daily returns. Your earnings are calculated and available for withdrawal based on the plan cycle.</p>
+                            <p>To start investing, connect your wallet, choose an investment plan, deposit USDT, and begin earning daily returns. Your earnings are calculated and available for withdrawal every 8 hours.</p>
                         </div>
                     </div>
-                     <div class="faq-item">
+
+                    <div class="faq-item">
                         <div class="faq-question">
                             <h3>What are the minimum and maximum investment amounts?</h3>
                             <i class="fas fa-chevron-down faq-icon"></i>
@@ -808,23 +819,84 @@
                             <p>The minimum investment varies by plan: Gold Plan: 10-100 USDT, Platinum Plan: 50-100 USDT, Diamond Plan: 100+ USDT with no maximum limit.</p>
                         </div>
                     </div>
-                     <div class="faq-item">
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How are daily returns calculated?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Daily returns are calculated based on your investment amount and the daily ROI rate of your chosen plan. Gold Plan: 16% daily, Platinum Plan: 9% daily, Diamond Plan: 5% daily.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does the referral program work?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our referral program has 15 levels with varying commission rates from 15% down to 1%. You earn commissions from your referrals' investments based on your total investment amount and level requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does the leadership program work?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The leadership program rewards you for building an active team. With 3 levels requiring 200, 500, and 1000 active team members, you can earn additional bonuses of 3%, 7%, and 10% respectively from your team's ROI withdrawals.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is there a withdrawal fee?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, there are no withdrawal fees for ROI or referral earnings. The contract only deducts a 10% owner fee from deposits to maintain platform operations.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
                         <div class="faq-question">
                             <h3>How secure is Nexagon?</h3>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                             <p>Nexagon uses audited smart contracts on the Binance Smart Chain. Our contracts have been verified and implement multiple security measures including reentrancy protection to protect user funds.</p>
+                            <p>Nexagon uses audited smart contracts on the Binance Smart Chain. Our contracts have been verified and implement multiple security measures including reentrancy protection to protect user funds.</p>
                         </div>
                     </div>
-                    <!-- Added more generic FAQs for layout balance -->
+
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Can I have multiple active investments?</h3>
+                            <h3>What happens if I refer someone but don't meet the requirements for higher levels?</h3>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                             <p>Yes, you can have multiple active investments across different plans simultaneously. Each investment is tracked separately with its own ROI calculation and duration.</p>
+                            <p>If you don't meet the minimum investment requirements for higher referral levels, the corresponding referral bonus will expire and be added to the expired contract balance, which is used for platform maintenance and development.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I have multiple active investments at the same time?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, you can have multiple active investments across different plans simultaneously. Each investment is tracked separately with its own ROI calculation and duration.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What happens when an investment plan ends?</h3>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>When an investment plan reaches its duration, it becomes inactive and stops generating returns. You can then withdraw any remaining rewards and start a new investment if desired.</p>
                         </div>
                     </div>
                 </div>
@@ -1097,6 +1169,7 @@
                 document.getElementById('referralBonusAmount').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
                 document.getElementById('leadershipBonusStats').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
                 document.getElementById('referralTeamCount').textContent = teamCount;
+                document.getElementById('leadershipTeamCount').textContent = teamCount;
                 
                 let userLevel = 0;
                 const referralRequirements = await contract.methods.getReferralRequirements().call();
@@ -1212,11 +1285,7 @@
         }
 
         function updateInvestmentSummary() {
-            const amount = parseFloat(document.getElementById('investmentAmount').value) || 0;
-            const fee = amount * 0.10;
-            const total = amount + fee;
-            document.getElementById('summaryFee').textContent = `${fee.toFixed(2)} USDT`;
-            document.getElementById('summaryTotal').textContent = `${total.toFixed(2)} USDT`;
+            // Removed fee and total pay display as requested
         }
 
         async function confirmInvestment() {
