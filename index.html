@@ -121,7 +121,7 @@
         /* Header / Navbar */
         .header {
             position: fixed; top: 0; left: 0; right: 0;
-            height: 90px;
+            height: 70px; /* Reduced from 90px */
             background: rgba(3, 0, 20, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -133,9 +133,9 @@
         .nav { display: flex; justify-content: space-between; align-items: center; height: 100%; }
         
         .nav__logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo { width: 42px; height: 42px; filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.5)); transition: transform 0.3s ease; }
+        .logo { width: 36px; height: 36px; filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.5)); transition: transform 0.3s ease; }
         .nav__logo:hover .logo { transform: rotate(10deg); }
-        .logo__text { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; color: white; font-family: var(--font-heading); }
+        .logo__text { font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; color: white; font-family: var(--font-heading); }
 
         .nav__menu { display: flex; align-items: center; gap: 40px; }
         .nav__list { display: flex; list-style: none; gap: 32px; }
@@ -195,7 +195,7 @@
         }
 
         .btn-sm { padding: 8px 20px; font-size: 0.85rem; }
-        .btn-lg { padding: 16px 36px; font-size: 1.1rem; }
+        .btn-lg { padding: 12px 28px; font-size: 0.95rem; } /* Reduced from 16px 36px */
 
         /* Sections General */
         .section { padding: 100px 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
@@ -218,7 +218,7 @@
         }
 
         /* Hero Section */
-        #home { padding-top: 140px; padding-bottom: 80px; position: relative; }
+        #home { padding-top: 100px; padding-bottom: 80px; position: relative; } /* Reduced padding-top from 140px */
         .hero__container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
         
         .badge {
@@ -433,7 +433,7 @@
         
         @media (max-width: 768px) {
             .nav__menu {
-                position: fixed; top: 90px; left: -100%; width: 100%; height: calc(100vh - 90px);
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
                 background: #030014; flex-direction: column; padding: 40px;
                 transition: 0.4s; align-items: flex-start; border-top: 1px solid rgba(255,255,255,0.05);
             }
@@ -727,7 +727,12 @@
                     <p style="color: var(--text-muted); margin-bottom: 20px;">Share this link to grow your network</p>
                     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
                         <input type="text" id="referralLink" class="link-input" readonly style="flex: 1;">
-                        <button class="btn btn--primary" id="copyLink"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <!-- Button copy dipindahkan ke bawah link dan di tengah -->
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <button class="btn btn--primary" id="copyLink" style="padding: 12px 28px; font-size: 0.95rem;">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
                     </div>
                     <div class="social-share" style="justify-content: center; display: flex; gap: 10px;">
                         <button class="btn btn--outline btn-sm" id="shareTelegram"><i class="fab fa-telegram"></i></button>
