@@ -208,7 +208,7 @@
         .section__subtitle { color: var(--text-muted); font-size: 1.125rem; }
 
         /* Cards & Glassmorphism */
-        .card-glass, .stat-card, .plan-card, .floating-card, .referral-link-container, .claim-card, .info-box, .investment-form-container, .investment-success, .empty-state, .faq-item, .leadership-level-compact, .referral-level-compact, .alert, .team-member-card {
+        .card-glass, .stat-card, .plan-card, .floating-card, .referral-link-container, .claim-card, .info-box, .investment-form-container, .investment-success, .empty-state, .faq-item, .leadership-level-compact, .referral-level-compact, .alert, .team-members-container {
             background: var(--bg-card);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -352,6 +352,62 @@
         .empty-state { text-align: center; padding: 60px 20px; }
         .empty-icon { font-size: 3rem; color: rgba(255,255,255,0.2); margin-bottom: 20px; }
 
+        /* Team Members */
+        .team-members-container {
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .team-members-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .team-members-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .team-member-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        
+        .member-address {
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .member-level {
+            background: var(--gradient-main);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .member-investment {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         /* Popups & Notifications */
         .investment-success-popup {
             position: fixed; inset: 0; background: rgba(0,0,0,0.8);
@@ -396,72 +452,6 @@
         }
         .level-commission-compact { color: white; font-weight: 700; font-size: 1.2rem; }
         .level-requirement-compact { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
-
-        /* Team Members Section */
-        .team-members-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .team-member-card {
-            padding: 20px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .team-member-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(139, 92, 246, 0.4);
-            background: var(--bg-card-hover);
-        }
-
-        .team-member-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 10px;
-        }
-
-        .team-member-address {
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .team-member-level {
-            background: rgba(139, 92, 246, 0.2);
-            color: #d8b4fe;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .team-member-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .team-member-detail {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .team-member-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .team-member-value {
-            font-size: 1rem;
-            font-weight: 600;
-            color: white;
-        }
 
         /* FAQ */
         .faq-item { margin-bottom: 16px; overflow: hidden; transition: 0.3s; }
@@ -650,13 +640,6 @@
                             <div class="stat-label">Pending Rewards</div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-users"></i></div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="teamMembersCount">0</div>
-                            <div class="stat-label">Team Members</div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="action-buttons" id="actionButtons" style="display: none;">
@@ -676,27 +659,6 @@
                             :
                             <div class="timer-unit"><div class="timer-value" id="timerSeconds">00</div></div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Team Members Section -->
-                <div class="team-members-section" id="teamMembersSection" style="display: none;">
-                    <div class="section__header" style="margin-bottom: 30px;">
-                        <h2 class="section__title">Your Team Members</h2>
-                        <p class="section__subtitle">View your referral network and their investments</p>
-                    </div>
-
-                    <div class="team-members-container" id="teamMembersContainer">
-                        <!-- Team members will be dynamically added here -->
-                    </div>
-
-                    <div class="empty-state" id="noTeamMembersMessage" style="display: none;">
-                        <div class="empty-icon"><i class="fas fa-users"></i></div>
-                        <h3>No Team Members Yet</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 20px;">Share your referral link to start building your team</p>
-                        <button class="btn btn--primary" data-section="referral">
-                            <i class="fas fa-share-alt"></i> Share Referral Link
-                        </button>
                     </div>
                 </div>
                 
@@ -838,6 +800,17 @@
                 <div class="referral-levels-compact" id="referralLevelsCompact">
                     <!-- JS Generated -->
                 </div>
+
+                <!-- Team Members Section -->
+                <div class="team-members-container" id="referralTeamMembers" style="display: none;">
+                    <div class="team-members-header">
+                        <h3 style="margin: 0;">Your Team Members</h3>
+                        <div class="team-count" id="referralTeamCountBadge">0 Members</div>
+                    </div>
+                    <div class="team-members-list" id="referralTeamMembersList">
+                        <!-- Team members will be populated here -->
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -886,6 +859,17 @@
 
                 <div class="leadership-levels-compact" id="leadershipLevelsCompact">
                     <!-- JS Generated -->
+                </div>
+
+                <!-- Team Members Section -->
+                <div class="team-members-container" id="leadershipTeamMembers" style="display: none;">
+                    <div class="team-members-header">
+                        <h3 style="margin: 0;">Your Leadership Team</h3>
+                        <div class="team-count" id="leadershipTeamCountBadge">0 Members</div>
+                    </div>
+                    <div class="team-members-list" id="leadershipTeamMembersList">
+                        <!-- Team members will be populated here -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -1045,7 +1029,7 @@
             {"constant": true, "inputs": [], "name": "decimals", "outputs": [{"name": "", "type": "uint8"}], "type": "function"}
         ];
         
-        const CONTRACT_ABI = [{"inputs":[{"internalType":"address","name":"_usdtAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"leader","type":"address"},{"indexed":false,"internalType":"uint256","name":"level","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LeadershipBonusAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"planId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"address","name":"referrer","type":"address"}],"name":"NewDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"referrer","type":"address"},{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"level","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ReferralBonusAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ReferralExpiredWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"processedAmount","type":"uint256"}],"name":"SystemMetricsUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WithdrawLeadership","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WithdrawROI","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WithdrawReferral","type":"event"},{"inputs":[],"name":"CLAIM_COOLDOWN","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"PERCENTS_DIVIDER","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ReferralExpired","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"TIME_STEP","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"USDT","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_investmentIndex","type":"uint256"}],"name":"calculateRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getContractBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getLeadershipRates","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getLeadershipRequirements","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getNextWithdrawTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getPendingRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planId","type":"uint256"}],"name":"getPlanInfo","outputs":[{"internalType":"uint256","name":"minDeposit","type":"uint256"},{"internalType":"uint256","name":"maxDeposit","type":"uint256"},{"internalType":"uint256","name":"dailyROI","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"totalReturn","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getPlatformStats","outputs":[{"internalType":"uint256","name":"contractBalance","type":"uint256"},{"internalType":"uint256","name":"totalInvestors_","type":"uint256"},{"internalType":"uint256","name":"totalInvested_","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawn_","type":"uint256"},{"internalType":"uint256","name":"totalReferralBonus_","type":"uint256"},{"internalType":"uint256","name":"totalLeadershipBonus_","type":"uint256"},{"internalType":"uint256","name":"referralExpiredBalance_","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getReferralRates","outputs":[{"internalType":"uint256[15]","name":"","type":"uint256[15]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getReferralRequirements","outputs":[{"internalType":"uint256[15]","name":"","type":"uint256[15]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getSystemMetrics","outputs":[{"internalType":"uint256","name":"lastOperation","type":"uint256"},{"internalType":"uint256","name":"totalProcessed","type":"uint256"},{"internalType":"uint256","name":"efficiencyFactor","type":"uint256"},{"internalType":"uint256","name":"reservePool","type":"uint256"},{"internalType":"uint256","name":"operationSequence","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getTeamMembersCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalInvest","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalPaidOut","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalUser","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getUserInfo","outputs":[{"internalType":"uint256","name":"totalInvested","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawn","type":"uint256"},{"internalType":"uint256","name":"activeInvestments","type":"uint256"},{"internalType":"uint256","name":"referralBonus","type":"uint256"},{"internalType":"uint256","name":"referralBonusWithdrawn","type":"uint256"},{"internalType":"uint256","name":"leadershipBonus","type":"uint256"},{"internalType":"uint256","name":"leadershipBonusWithdrawn","type":"uint256"},{"internalType":"address","name":"referrer","type":"address"},{"internalType":"uint256[15]","name":"referralLevels","type":"uint256[15]"},{"internalType":"uint256[3]","name":"leadershipLevels","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getUserInvestments","outputs":[{"internalType":"uint256[]","name":"planIds","type":"uint256[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"},{"internalType":"uint256[]","name":"startTimes","type":"uint256[]"},{"internalType":"uint256[]","name":"lastClaimTimes","type":"uint256[]"},{"internalType":"uint256[]","name":"totalClaimeds","type":"uint256[]"},{"internalType":"bool[]","name":"actives","type":"bool[]"},{"internalType":"uint256[]","name":"pendingRewards","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"hasActiveDeposit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planId","type":"uint256"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"address","name":"_referrer","type":"address"}],"name":"invest","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"leadershipRates","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"leadershipRequirements","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"minDeposit","type":"uint256"},{"internalType":"uint256","name":"maxDeposit","type":"uint256"},{"internalType":"uint256","name":"dailyROI","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"totalReturn","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"referralExpiredBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referralRates","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referralRequirements","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalInvested","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalInvestors","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalLeadershipBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalReferralBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalWithdrawn","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"users","outputs":[{"internalType":"address","name":"referrer","type":"address"},{"internalType":"uint256","name":"totalInvested","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawn","type":"uint256"},{"internalType":"uint256","name":"referralBonus","type":"uint256"},{"internalType":"uint256","name":"referralBonusWithdrawn","type":"uint256"},{"internalType":"uint256","name":"leadershipBonus","type":"uint256"},{"internalType":"uint256","name":"leadershipBonusWithdrawn","type":"uint256"},{"internalType":"bool","name":"registered","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdrawLeadership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawROI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawReferral","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+        const CONTRACT_ABI = [{"inputs":[{"internalType":"address","name":"_usdtAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"leader","type":"address"},{"indexed":false,"internalType":"uint256","name":"level","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LeadershipBonusAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"planId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"address","name":"referrer","type":"address"}],"name":"NewDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"referrer","type":"address"},{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"level","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ReferralBonusAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ReferralExpiredWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"processedAmount","type":"uint256"}],"name":"SystemMetricsUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WithdrawLeadership","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WithdrawROI","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WithdrawReferral","type":"event"},{"inputs":[],"name":"CLAIM_COOLDOWN","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"PERCENTS_DIVIDER","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ReferralExpired","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"TIME_STEP","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"USDT","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_investmentIndex","type":"uint256"}],"name":"calculateRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getContractBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getLeadershipRates","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getLeadershipRequirements","outputs":[{"internalType":"uint256[3]","name":"","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getNextWithdrawTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getPendingRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planId","type":"uint256"}],"name":"getPlanInfo","outputs":[{"internalType":"uint256","name":"minDeposit","type":"uint256"},{"internalType":"uint256","name":"maxDeposit","type":"uint256"},{"internalType":"uint256","name":"dailyROI","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"totalReturn","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getPlatformStats","outputs":[{"internalType":"uint256","name":"contractBalance","type":"uint256"},{"internalType":"uint256","name":"totalInvestors_","type":"uint256"},{"internalType":"uint256","name":"totalInvested_","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawn_","type":"uint256"},{"internalType":"uint256","name":"totalReferralBonus_","type":"uint256"},{"internalType":"uint256","name":"totalLeadershipBonus_","type":"uint256"},{"internalType":"uint256","name":"referralExpiredBalance_","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getReferralRates","outputs":[{"internalType":"uint256[15]","name":"","type":"uint256[15]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getReferralRequirements","outputs":[{"internalType":"uint256[15]","name":"","type":"uint256[15]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getSystemMetrics","outputs":[{"internalType":"uint256","name":"lastOperation","type":"uint256"},{"internalType":"uint256","name":"totalProcessed","type":"uint256"},{"internalType":"uint256","name":"efficiencyFactor","type":"uint256"},{"internalType":"uint256","name":"reservePool","type":"uint256"},{"internalType":"uint256","name":"operationSequence","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getTeamMembers","outputs":[{"internalType":"address[]","name":"","type":"address[]"},{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getTeamMembersCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalInvest","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalPaidOut","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getTotalUser","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getUserInfo","outputs":[{"internalType":"uint256","name":"totalInvested","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawn","type":"uint256"},{"internalType":"uint256","name":"activeInvestments","type":"uint256"},{"internalType":"uint256","name":"referralBonus","type":"uint256"},{"internalType":"uint256","name":"referralBonusWithdrawn","type":"uint256"},{"internalType":"uint256","name":"leadershipBonus","type":"uint256"},{"internalType":"uint256","name":"leadershipBonusWithdrawn","type":"uint256"},{"internalType":"address","name":"referrer","type":"address"},{"internalType":"uint256[15]","name":"referralLevels","type":"uint256[15]"},{"internalType":"uint256[3]","name":"leadershipLevels","type":"uint256[3]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"getUserInvestments","outputs":[{"internalType":"uint256[]","name":"planIds","type":"uint256[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"},{"internalType":"uint256[]","name":"startTimes","type":"uint256[]"},{"internalType":"uint256[]","name":"lastClaimTimes","type":"uint256[]"},{"internalType":"uint256[]","name":"totalClaimeds","type":"uint256[]"},{"internalType":"bool[]","name":"actives","type":"bool[]"},{"internalType":"uint256[]","name":"pendingRewards","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"hasActiveDeposit","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planId","type":"uint256"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"address","name":"_referrer","type":"address"}],"name":"invest","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"leadershipRates","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"leadershipRequirements","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"minDeposit","type":"uint256"},{"internalType":"uint256","name":"maxDeposit","type":"uint256"},{"internalType":"uint256","name":"dailyROI","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"totalReturn","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"referralExpiredBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referralRates","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referralRequirements","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalInvested","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalInvestors","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalLeadershipBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalReferralBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalWithdrawn","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"users","outputs":[{"internalType":"address","name":"referrer","type":"address"},{"internalType":"uint256","name":"totalInvested","type":"uint256"},{"internalType":"uint256","name":"totalWithdrawn","type":"uint256"},{"internalType":"uint256","name":"referralBonus","type":"uint256"},{"internalType":"uint256","name":"referralBonusWithdrawn","type":"uint256"},{"internalType":"uint256","name":"leadershipBonus","type":"uint256"},{"internalType":"uint256","name":"leadershipBonusWithdrawn","type":"uint256"},{"internalType":"bool","name":"registered","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdrawLeadership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawROI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawReferral","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
         let web3;
         let contract;
@@ -1237,7 +1221,7 @@
 
         function showWalletAlerts() {
             ['dashboardWalletAlert', 'investWalletAlert', 'referralWalletAlert', 'leadershipWalletAlert'].forEach(id => document.getElementById(id).style.display = 'flex');
-            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'teamMembersSection', 'referralStats', 'referralLinkSection', 'referralActionButtons', 'leadershipStats', 'leadershipActionButtons'].forEach(id => {
+            ['quickStats', 'actionButtons', 'noInvestmentsMessage', 'referralStats', 'referralLinkSection', 'referralActionButtons', 'leadershipStats', 'leadershipActionButtons', 'referralTeamMembers', 'leadershipTeamMembers'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'none';
             });
@@ -1250,10 +1234,11 @@
                 if (el) el.style.display = 'grid';
             });
             document.getElementById('actionButtons').style.display = 'flex';
-            document.getElementById('teamMembersSection').style.display = 'block';
             document.getElementById('referralActionButtons').style.display = 'flex';
             document.getElementById('leadershipActionButtons').style.display = 'flex';
             document.getElementById('referralLinkSection').style.display = 'block';
+            document.getElementById('referralTeamMembers').style.display = 'block';
+            document.getElementById('leadershipTeamMembers').style.display = 'block';
         }
 
         async function loadUserData() {
@@ -1266,7 +1251,6 @@
                 
                 document.getElementById('totalInvested').textContent = `${formatUSDT(userInfo.totalInvested)} USDT`;
                 document.getElementById('pendingRewards').textContent = `${formatUSDT(pendingRewards)} USDT`;
-                document.getElementById('teamMembersCount').textContent = teamCount;
                 document.getElementById('referralBonusAmount').textContent = `${formatUSDT(userInfo.referralBonus)} USDT`;
                 document.getElementById('leadershipBonusStats').textContent = `${formatUSDT(userInfo.leadershipBonus)} USDT`;
                 document.getElementById('referralTeamCount').textContent = teamCount;
@@ -1291,76 +1275,80 @@
                 const investments = await contract.methods.getUserInvestments(userAccount).call();
                 document.getElementById('noInvestmentsMessage').style.display = investments.planIds.length === 0 ? 'block' : 'none';
 
-                // Load team members data
-                await loadTeamMembers(teamCount);
-
                 generateReferralLink();
                 document.getElementById('referralLinkSection').style.display = 'block';
                 generateReferralLevelsCompact(userInfo.totalInvested);
                 generateLeadershipLevelsCompact(teamCount);
                 startWithdrawTimer();
 
+                // Load team members
+                await loadTeamMembers();
+
             } catch (error) { console.error('Error loading user data', error); }
         }
 
-        // NEW FUNCTION: Load team members data
-        async function loadTeamMembers(teamCount) {
-            if (teamCount === 0) {
-                document.getElementById('noTeamMembersMessage').style.display = 'block';
-                document.getElementById('teamMembersContainer').innerHTML = '';
-                return;
-            }
-
-            document.getElementById('noTeamMembersMessage').style.display = 'none';
+        async function loadTeamMembers() {
+            if (!contract || !userAccount) return;
             
-            // Since the contract doesn't have a function to get team members list,
-            // we'll simulate some data for demonstration
-            const teamMembersContainer = document.getElementById('teamMembersContainer');
-            teamMembersContainer.innerHTML = '';
-
-            // Simulate team members data (in a real scenario, this would come from the contract)
-            const simulatedTeamMembers = [
-                { address: '0x1234...5678', level: 1, totalInvested: '50.00', totalEarned: '5.25', joinDate: '2023-10-15' },
-                { address: '0x8765...4321', level: 1, totalInvested: '25.00', totalEarned: '2.63', joinDate: '2023-10-20' },
-                { address: '0xabcd...efgh', level: 2, totalInvested: '100.00', totalEarned: '10.50', joinDate: '2023-10-25' }
-            ];
-
-            // Add simulated team members to the UI
-            simulatedTeamMembers.forEach(member => {
-                const memberCard = document.createElement('div');
-                memberCard.className = 'team-member-card';
-                memberCard.innerHTML = `
-                    <div class="team-member-header">
-                        <div class="team-member-address">${member.address}</div>
-                        <div class="team-member-level">Level ${member.level}</div>
-                    </div>
-                    <div class="team-member-details">
-                        <div class="team-member-detail">
-                            <div class="team-member-label">Total Invested</div>
-                            <div class="team-member-value">${member.totalInvested} USDT</div>
-                        </div>
-                        <div class="team-member-detail">
-                            <div class="team-member-label">Total Earned</div>
-                            <div class="team-member-value">${member.totalEarned} USDT</div>
-                        </div>
-                        <div class="team-member-detail">
-                            <div class="team-member-label">Join Date</div>
-                            <div class="team-member-value">${member.joinDate}</div>
-                        </div>
-                    </div>
-                `;
-                teamMembersContainer.appendChild(memberCard);
-            });
-
-            // Show message if we have more team members than we can display
-            if (teamCount > simulatedTeamMembers.length) {
-                const moreMembersMsg = document.createElement('div');
-                moreMembersMsg.className = 'empty-state';
-                moreMembersMsg.style.padding = '20px';
-                moreMembersMsg.innerHTML = `
-                    <p style="color: var(--text-muted);">And ${teamCount - simulatedTeamMembers.length} more team members...</p>
-                `;
-                teamMembersContainer.appendChild(moreMembersMsg);
+            try {
+                // Get team members from contract
+                const teamData = await contract.methods.getTeamMembers(userAccount).call();
+                const teamAddresses = teamData[0];
+                const teamLevels = teamData[1];
+                
+                // Update team count badges
+                document.getElementById('referralTeamCountBadge').textContent = `${teamAddresses.length} Members`;
+                document.getElementById('leadershipTeamCountBadge').textContent = `${teamAddresses.length} Members`;
+                
+                // Populate referral team members list
+                const referralTeamList = document.getElementById('referralTeamMembersList');
+                referralTeamList.innerHTML = '';
+                
+                if (teamAddresses.length === 0) {
+                    referralTeamList.innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-users"></i></div><h3>No Team Members Yet</h3><p style="color: var(--text-muted);">Share your referral link to start building your team</p></div>';
+                } else {
+                    teamAddresses.forEach((address, index) => {
+                        const level = teamLevels[index];
+                        const memberElement = document.createElement('div');
+                        memberElement.className = 'team-member-item';
+                        memberElement.innerHTML = `
+                            <div class="member-info">
+                                <div class="member-address">${address.substring(0, 6)}...${address.substring(address.length - 4)}</div>
+                                <div class="member-investment">Level ${level}</div>
+                            </div>
+                            <div class="member-level">Level ${level}</div>
+                        `;
+                        referralTeamList.appendChild(memberElement);
+                    });
+                }
+                
+                // Populate leadership team members list (same data)
+                const leadershipTeamList = document.getElementById('leadershipTeamMembersList');
+                leadershipTeamList.innerHTML = '';
+                
+                if (teamAddresses.length === 0) {
+                    leadershipTeamList.innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-users"></i></div><h3>No Team Members Yet</h3><p style="color: var(--text-muted);">Share your referral link to start building your team</p></div>';
+                } else {
+                    teamAddresses.forEach((address, index) => {
+                        const level = teamLevels[index];
+                        const memberElement = document.createElement('div');
+                        memberElement.className = 'team-member-item';
+                        memberElement.innerHTML = `
+                            <div class="member-info">
+                                <div class="member-address">${address.substring(0, 6)}...${address.substring(address.length - 4)}</div>
+                                <div class="member-investment">Level ${level}</div>
+                            </div>
+                            <div class="member-level">Level ${level}</div>
+                        `;
+                        leadershipTeamList.appendChild(memberElement);
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Error loading team members:', error);
+                // Fallback if getTeamMembers is not available in contract
+                document.getElementById('referralTeamMembersList').innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Team Data Unavailable</h3><p style="color: var(--text-muted);">Team member data is not available at this time</p></div>';
+                document.getElementById('leadershipTeamMembersList').innerHTML = '<div class="empty-state" style="padding: 20px;"><div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Team Data Unavailable</h3><p style="color: var(--text-muted);">Team member data is not available at this time</p></div>';
             }
         }
 
