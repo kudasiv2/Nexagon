@@ -285,7 +285,7 @@ h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--text-main); line
 }
 .plan-card.featured:hover { transform: scale(1.05) translateY(-10px); }
 .plan-card.featured::before {
-    content: 'MOST POPULAR'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    content: 'POPULAR'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
     background: var(--gradient-main); padding: 6px 20px; border-radius: 20px;
     font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; color: white;
     box-shadow: 0 5px 15px rgba(192, 38, 211, 0.4);
