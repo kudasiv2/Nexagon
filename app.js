@@ -1,5 +1,5 @@
 // Updated contract address and ABI
-const CONTRACT_ADDRESS = '0x86f6A9d479590A5fB1908811e34f98Ec5D9d97bb';
+const CONTRACT_ADDRESS = '0xf6AaBD918C2eF697d9fe3D3e22d4b44F3107CF0a';
 const USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
 const READ_ONLY_RPC = 'https://bsc-dataseed1.binance.org/';
 
